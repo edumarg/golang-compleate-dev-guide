@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"strings"
+)
 
 // Create a new type of "deck"
 // which is a slice of strings
@@ -30,4 +34,19 @@ func (d deck) print() { // receiver function that receives any variable type dec
 
 func deal(d deck, handSize uint) (deck, deck) {
 	return d[:handSize], d[handSize:]
+}
+
+func (d deck) toString() string {
+	return strings.Join(d, ",")
+}
+
+func toByte(s string) []byte {
+	return []byte(s)
+
+}
+
+func (d deck) saveDeck(fileName string) error {
+	deckString := d.toString()
+	deckByte := toByte(deckString)
+	return ioutil.WriteFile(fileName, deckByte, 0666)
 }
