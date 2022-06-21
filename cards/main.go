@@ -13,5 +13,8 @@ func main() {
 	myDeck := newDeckFromFile("my_cards")
 	fmt.Println("---from file---")
 	myDeck.print()
+	cards.shuffle()
+	fmt.Println("---shuffled deck---")
+	cards.print()
 
 }
