@@ -11,7 +11,8 @@ type person struct {
 	firstName string
 	lastName  string
 	age       uint8
-	contact   contactInfo
+	// contact   contactInfo
+	contactInfo // No need field name,  you can use only the name of the type.
 }
 
 func main() {
@@ -19,7 +20,7 @@ func main() {
 		lastName:  "Marg",
 		firstName: "Edu",
 		age:       40,
-		contact: contactInfo{
+		contactInfo: contactInfo{
 			email: "edu@mail.com",
 			phone: "555-5555-5555",
 		},
@@ -30,6 +31,19 @@ func main() {
 	var ber person
 	fmt.Printf("%+v", ber)
 	ber.age, ber.firstName, ber.lastName = 38, "Ber", "Spy"
-	ber.contact = contactInfo{phone: "555-4444-4444", email: "ber@mail.com"}
+	ber.contactInfo = contactInfo{phone: "555-4444-4444", email: "ber@mail.com"}
 	fmt.Printf("%+v", ber)
+	mike := person{firstName: "Mike", lastName: "Piazza", age: 50, contactInfo: contactInfo{email: "mike@mail.com", phone: "566-6666-6666"}}
+	mike.print()
+	mikePointer := &mike
+	mikePointer.updateName("Mikey")
+	mike.print()
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+func (pointerToPerson *person) updateName(newFirstName string) {
+	(*pointerToPerson).firstName = newFirstName
 }
