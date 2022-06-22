@@ -35,8 +35,9 @@ func main() {
 	fmt.Printf("%+v", ber)
 	mike := person{firstName: "Mike", lastName: "Piazza", age: 50, contactInfo: contactInfo{email: "mike@mail.com", phone: "566-6666-6666"}}
 	mike.print()
-	mikePointer := &mike
-	mikePointer.updateName("Mikey")
+	// mikePointer := &mike // & is operator to give the memory address of the value variable is pointing to
+	// mikePointer.updateName("Mikey")
+	mike.updateName("Mikey") // shortcut to use pointers with a receiver function that uses as type  a pointer
 	mike.print()
 }
 
@@ -44,6 +45,6 @@ func (p person) print() {
 	fmt.Printf("%+v", p)
 }
 
-func (pointerToPerson *person) updateName(newFirstName string) {
+func (pointerToPerson *person) updateName(newFirstName string) { // * is an operator to give the value the memory address is point at
 	(*pointerToPerson).firstName = newFirstName
 }
