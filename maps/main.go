@@ -43,6 +43,6 @@ func main() {
 // iterate over a color map
 func printColors(c map[string]string) {
 	for color, hex := range c {
-		fmt.Println(color, hex)
+		fmt.Println("Hex code for", color, "is:", hex)
 	}
 }
