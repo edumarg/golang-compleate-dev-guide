@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -24,10 +25,13 @@ func main() {
 	// 	// fmt.Println(<-c)
 	// } // Will get the channel values according to the number of links
 
-	for {
-		go checkURL(<-c, c)
-	} // infinite loop
+	for l := range c {
+		go func(link string) {
+			time.Sleep(3 * time.Second)
+			checkURL(link, c)
+		}(l) // function literal
 
+	} // infinite loop
 }
 
 func checkURL(URL string, c chan string) {
