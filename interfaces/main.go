@@ -1,11 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type bot interface {
-	getGreeting() string
+// interface creates a new type that has as "honorary members" to it.
+// This "Honorary members" are methods(functions), that are share by different functions that may return
+// different values but the logic of the function is similar or has the same objective.
+type templateBot interface { // interface name
+	getGreeting(string) string //<function name>(list of arguments types) list of return types
 }
-
 type englishBot struct{}
 type spanishBot struct{}
 
@@ -17,16 +21,16 @@ func main() {
 
 }
 
-func (eb englishBot) getGreeting() string {
+func (eb englishBot) getGreeting(name string) string {
 	// custom logic to get english greeting
-	return "Hello, how are you?"
+	return "Hello " + name + ", how are you?"
 }
 
-func (sb spanishBot) getGreeting() string {
+func (sb spanishBot) getGreeting(name string) string {
 	// custom logic to get spanish greeting
-	return "Hola, como estas?!!"
+	return "Hola " + name + ", como estas?"
 }
 
-func printGreeting(b bot) {
-	fmt.Println(b.getGreeting())
+func printGreeting(tb templateBot) {
+	fmt.Println(tb.getGreeting("Mike"))
 }
